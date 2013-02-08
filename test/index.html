@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>QUnit Tests for UoPToC</title>
+		<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.11.0.css" type="text/css" >
+
+		<style>
+		.includa-input, .includa-output {
+			box-shadow: 0 0.5ex 1em rgba(0,0,0,0.3);
+			border-radius: 0.5ex;
+			min-height: 3em;
+		}
+
+		.includa-input {
+			width: auto;
+			padding: 1ex 1ex 1em;
+		}
+		.includa-output {
+			width: 100%;
+		}
+		.includa-sourcelink {
+			font-size: 75%;
+			text-align: right;
+		}
+		</style>
+	</head>
+	<body>
+		<div id="qunit"></div>
+		<div id="qunit-fixture"></div>
+
+		<section data-includa-url="includeme.html" >
+			<h1>Content and IFrame</h1>
+		</section>		
+
+		<section data-includa-url="includeme.html" data-includa-interpret="false">
+			<h1>Content Only</h1>
+		</section>		
+
+		<script src="../src/includa.js"></script>
+	    <script src="http://code.jquery.com/qunit/qunit-1.11.0.js"></script>  
+		<script src="test.js"></script>  
+	</body>
+</html>
