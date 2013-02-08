@@ -1,7 +1,7 @@
 test("pre", 1,
 	function() {
 		var pres = document.querySelectorAll("pre");
-		equal( pres.length , 2, "There shoudl be 2 pre-elements after the test." );
+		equal( pres.length , 4, "There shoudl be 4 pre-elements after the test." );
 	}
 );
 test("iframe", 1,

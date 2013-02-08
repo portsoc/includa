@@ -39,10 +39,20 @@
 				append.push( content );
 				append.push( "</pre>" );
 
-				if (target.dataset.includaInterpret !== 'false') {
-					append.push( "<iframe id='"+u+"' onload='rdfx.includa.resizer("+u+");' seamless height=1 class='includa-output' src='" );
-					append.push( target.dataset.includaUrl );
-					append.push( "'></iframe>" );
+				if (target.dataset.includaLang === 'js') {
+					append.push( "<pre class='includa-output'>" );
+					var source = this.responseText;
+					source = source.replace( new RegExp("document.write", "gi") , "append.push" );
+					source = source.replace( new RegExp("console.log", "gi") , "append.push" );
+					console.log(source);
+					eval(source);
+					append.push( "</pre>" );
+				} else {
+					if (target.dataset.includaInterpret !== 'false') {
+						append.push( "<iframe id='"+u+"' onload='rdfx.includa.resizer("+u+");' seamless height=1 class='includa-output' src='" );
+						append.push( target.dataset.includaUrl );
+						append.push( "'></iframe>" );
+					}
 				}
 				
 				append.push( "<p class='includa-sourcelink'>Source: <a href='"+target.dataset.includaUrl + "'>" + target.dataset.includaUrl + "</a></p>");
@@ -53,6 +63,7 @@
 
 			ajaxLoad(target.dataset.includaUrl, loaded);
 		},
+
 
 		resizer = function (id){
 			var fr,h;
