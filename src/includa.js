@@ -1,7 +1,12 @@
+Array.prototype.ppush = function(x) {
+	this.push("<p>");
+	this.push(x);
+	this.push("</p>");
+};
 
- var rdfx = rdfx || {};
+var rdfx = rdfx || {};
 
- rdfx.includa = (
+rdfx.includa = (
 	function () {
 		"use strict";
 
@@ -42,8 +47,8 @@
 				if (target.dataset.includaLang === 'js') {
 					append.push( "<pre class='includa-output'>" );
 					var source = this.responseText;
-					source = source.replace( new RegExp("document.write", "gi") , "append.push" );
-					source = source.replace( new RegExp("console.log", "gi") , "append.push" );
+					source = source.replace( new RegExp("document.write", "gi") , "append.ppush" );
+					source = source.replace( new RegExp("console.log", "gi") , "append.ppush" );
 					console.log(source);
 					eval(source);
 					append.push( "</pre>" );
