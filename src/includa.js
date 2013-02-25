@@ -1,6 +1,6 @@
 Array.prototype.ppush = function(x) {
 	this.push("<p>");
-	this.push(x);
+	this.push(""+x);
 	this.push("</p>");
 };
 
@@ -44,22 +44,22 @@ rdfx.includa = (
 				append.push( content );
 				append.push( "</pre>" );
 
-				if (target.dataset.includaLang === 'js') {
-					append.push( "<pre class='includa-output'>" );
-					var source = this.responseText;
-					source = source.replace( new RegExp("document.write", "gi") , "append.ppush" );
-					source = source.replace( new RegExp("console.log", "gi") , "append.ppush" );
-					console.log(source);
-					eval(source);
-					append.push( "</pre>" );
-				} else {
-					if (target.dataset.includaInterpret !== 'false') {
+				if (target.dataset.includaInterpret !== 'false') {
+					if (target.dataset.includaLang === 'js') {
+						append.push( "<pre class='includa-output'>" );
+						var source = this.responseText;
+						source = source.replace( new RegExp("document.write", "gi") , "append.ppush" );
+						source = source.replace( new RegExp("console.log", "gi") , "append.ppush" );
+						console.log(source);
+						eval(source);
+						append.push( "</pre>" );
+					} else {
 						append.push( "<iframe id='"+u+"' onload='rdfx.includa.resizer("+u+");' seamless height=1 class='includa-output' src='" );
 						append.push( target.dataset.includaUrl );
 						append.push( "'></iframe>" );
 					}
 				}
-				
+
 				append.push( "<p class='includa-sourcelink'>Source: <a href='"+target.dataset.includaUrl + "'>" + target.dataset.includaUrl + "</a></p>");
 
 				target.innerHTML += append.join("");
