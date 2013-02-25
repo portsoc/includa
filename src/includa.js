@@ -51,7 +51,13 @@ rdfx.includa = (
 						source = source.replace( new RegExp("document.write", "gi") , "append.ppush" );
 						source = source.replace( new RegExp("console.log", "gi") , "append.ppush" );
 						console.log(source);
-						eval(source);
+
+						try {
+							eval(source);
+						} catch (e) {
+							append.ppush( e.message );
+						}
+
 						append.push( "</pre>" );
 					} else {
 						append.push( "<iframe id='"+u+"' onload='rdfx.includa.resizer("+u+");' seamless height=1 class='includa-output' src='" );
