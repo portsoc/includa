@@ -51,16 +51,17 @@ rdfx.includa = (
 						source = source.replace( new RegExp("document.write", "gi") , "append.ppush" );
 						source = source.replace( new RegExp("console.log", "gi") , "append.ppush" );
 						console.log(source);
-						try {
-							eval(source);
-						} catch (e) {
-							append.ppush( e.message );
-						}
+						eval(source);
 						append.push( "</pre>" );
 					} else {
-						append.push( "<iframe id='"+u+"' onload='rdfx.includa.resizer("+u+");' seamless height=1 class='includa-output' src='" );
-						append.push( target.dataset.includaUrl );
-						append.push( "'></iframe>" );
+						if (target.dataset.includaSandbox === "false") {
+							// raw content without iframe
+							append.push(this.responseText);
+						} else {
+							append.push( "<iframe id='"+u+"' onload='rdfx.includa.resizer("+u+");' seamless width='100%' height='100%' style='padding:0; margin: 0' class='includa-output' src='" );
+							append.push( target.dataset.includaUrl );
+							append.push( "'></iframe>" );
+						}
 					}
 				}
 
