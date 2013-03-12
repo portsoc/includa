@@ -39,7 +39,7 @@ rdfx.includa = (
 				content = content.replace(/</g, "&lt;");
 				content = content.replace(/>/g, "&gt;");
 				content = content.replace(/\t/g, "	");
-				
+
 				append.push( "<pre class='includa-input'>" );
 				append.push( content );
 				append.push( "</pre>" );
@@ -56,7 +56,9 @@ rdfx.includa = (
 					} else {
 						if (target.dataset.includaSandbox === "false") {
 							// raw content without iframe
+							append.push( "<div class='includa-output'>" );
 							append.push(this.responseText);
+							append.push( "<div>" );
 						} else {
 							append.push( "<iframe id='"+u+"' onload='rdfx.includa.resizer("+u+");' seamless width='100%' height='100%' style='padding:0; margin: 0' class='includa-output' src='" );
 							append.push( target.dataset.includaUrl );
